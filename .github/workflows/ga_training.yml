@@ -16,6 +16,3 @@ jobs:
       - uses: action/checkout@v4
       - run: |
           docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" 
-      env:
-          RESULT: ${{ steps.source.outputs.result }}
-        run: echo "${RESULT}"
