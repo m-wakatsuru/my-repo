@@ -7,9 +7,11 @@ jobs:
       - run: sleep 10 && echo "1"
   second:
     runs-on: ubuntu-latest
+    needs: [first]
     steps:
       - run: sleep 10 && echo "2"
   third:
     runs-on: ubuntu-latest
+    needs: [second]
     steps:
       - run: sleep 10 && echo "3"
