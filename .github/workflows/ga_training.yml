@@ -1,18 +1,15 @@
-name: Static analysis
-on:
-  pull_request:
-    paths: ['.github/workflows/*.yml', '.github/workflows/*.yaml']
-defaults:
-  run:
-    shell: bash
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+name: Sequential jobs
+on: push
 jobs:
-  lint:
+  first:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
-      - uses: action/checkout@v4
-      - run: |
-          docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" 
+      - run: sleep 10 && echo "1"
+  second:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 10 && echo "2"
+  third:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 10 && echo "3"
