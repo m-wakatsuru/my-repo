@@ -4,4 +4,4 @@ jobs:
   print:
     runs-on: ubunts-latest
     steps:
-      -run: echo "${{ github.actor }}"
+      - run: echo "${{ github.actor }}"
