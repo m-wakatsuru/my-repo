@@ -4,6 +4,7 @@ jobs:
   print:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${CONTEXT}"
+      - uses: actions/checkout@v4
+      - run: echo "${HASH}"
         env:
-          CONTEXT: ${{ toJSON(github) }}
+          HASH: ${{ hashFiles('.github/workflows/*.yml') }}
