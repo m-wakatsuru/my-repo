@@ -1,11 +1,21 @@
-name: Github Output
-on: push
+name: Static analysis
+on:
+  pull_request:
+    paths: ['.github/workflows/*.yml', '.github/workflows/*.yaml']
+defaults:
+  run:
+    shell: bash
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 jobs:
-  share:
+  lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - id: source
-        run: echo "result=Hello" >> "${GITHUB_OUTPUT}"    
-      - env:
+      - uses: action/checkout@v4
+      - run: |
+          docker run --rm -v "$(pwd):$(pwd)" -w "$(pwd)" 
+      env:
           RESULT: ${{ steps.source.outputs.result }}
         run: echo "${RESULT}"
