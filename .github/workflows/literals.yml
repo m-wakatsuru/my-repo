@@ -1,10 +1,9 @@
-name: Genarate Functions
+name: JSON Functions
 on: push
 jobs:
   print:
     runs-on: ubuntu-latest
     steps:
-      - run: printenv | grep '_FUNC'
+      - run: echo "${CONTEXT}"
         env:
-          FORTATS_FUNC: ${{ format('{0},{1}','Hi','World') }}
-          JOIN_FUNC: ${{ join(github.event.*.html_url,',') }}
+          CONTEXT: ${{ toJSON(github) }}
